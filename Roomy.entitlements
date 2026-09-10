@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	Roomy is intentionally NOT sandboxed: reading Photos/Mail/Messages/other
+	apps' data and Time Machine local snapshots requires Full Disk Access,
+	which is incompatible with the App Sandbox. This file deliberately
+	contains no com.apple.security.app-sandbox key.
+
+	Hardened Runtime (required for notarization, Release builds only — see
+	Project.swift) is otherwise maximally restrictive by default: no JIT, no
+	unsigned executable memory, no disabled library validation, none of
+	which Roomy needs. The one exception below is real:
+	-->
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+	<!--
+	CategoryCoordinator.emptyTrash() sends Finder an Apple Event ("empty
+	trash") rather than deleting ~/.Trash's contents directly, since Finder
+	owns Trash semantics that a raw filesystem delete would bypass. Sending
+	Apple Events to another app is one of the few things Hardened Runtime
+	blocks by default even for a non-sandboxed app, and macOS still prompts
+	the user for this via TCC's Automation permission (NSAppleEventsUsageDescription
+	in Info.plist is the prompt's explanation text) independent of Hardened
+	Runtime — this entitlement only makes the capability possible at all.
+	-->
+</dict>
+</plist>
