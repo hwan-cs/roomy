@@ -9,6 +9,7 @@ Derived/
 DerivedData/
 *.xcuserstate
 xcuserdata/
+build/
 
 # macOS
 .DS_Store

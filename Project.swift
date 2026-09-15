@@ -35,7 +35,7 @@ let target = Target(
             ]),
             .release(name: .release, settings: [
                 "CODE_SIGN_IDENTITY": "Developer ID Application",
-                "DEVELOPMENT_TEAM": "",
+                "DEVELOPMENT_TEAM": "6DXT245L5T",
                 "ENABLE_HARDENED_RUNTIME": "YES",
             ]),
             .release(name: .configuration("LocalRelease"), settings: [
